@@ -6,16 +6,15 @@ export default class ImgApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
-  } 
+  }
 
   async fetchApi() {
     const URL = `${BASE_URL}/?key=${API_KEY}&q=${this.searchQuery}&lang=ru&
     image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=4`;
     try {
-      return await axios.get(URL).then(response => {
-        this.incrementPage();
-        return response.data;
-      });
+      const response = await axios.get(URL);
+      const increment = await this.incrementPage();
+      return response.data;
     } catch (error) {
       console.log(error.message);
     }
