@@ -24,6 +24,7 @@ loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
 function onSearch(event) {
   event.preventDefault();
   loadMoreBtn.hide();
+  imgsApiService.resetPage();
   imgsApiService.query = event.currentTarget.elements.searchQuery.value;
 
   if (imgsApiService.query === '') {
@@ -46,7 +47,6 @@ function onSearch(event) {
     }
   });
 
-  imgsApiService.resetPage();
   loadMoreBtn.enable();
   clearHitsContainer();
 }

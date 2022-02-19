@@ -13,7 +13,7 @@ export default class ImgApiService {
     image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=40`;
     try {
       const response = await axios.get(URL);
-      await this.incrementPage();
+      this.incrementPage();
       return response.data;
     } catch (error) {
       console.log(error.message);
