@@ -10,10 +10,10 @@ export default class ImgApiService {
 
   async fetchApi() {
     const URL = `${BASE_URL}/?key=${API_KEY}&q=${this.searchQuery}&lang=ru&
-    image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=4`;
+    image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=40`;
     try {
       const response = await axios.get(URL);
-      const increment = await this.incrementPage();
+      await this.incrementPage();
       return response.data;
     } catch (error) {
       console.log(error.message);

@@ -58,7 +58,7 @@ function onLoadMore() {
     appendHitsMarkup(data.hits);
     scrollToMore();
 
-    if (Math.ceil(data.totalHits / 4) === imgsApiService.page - 1) {
+    if (Math.ceil(data.totalHits / 40) === imgsApiService.page - 1) {
       loadMoreBtn.hide();
       Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
     }
