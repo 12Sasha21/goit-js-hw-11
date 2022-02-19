@@ -6,7 +6,7 @@ export default class ImgApiService {
   constructor() {
     this.searchQuery = '';
     this.page = 1;
-  }
+  } 
 
   async fetchApi() {
     const URL = `${BASE_URL}/?key=${API_KEY}&q=${this.searchQuery}&lang=ru&

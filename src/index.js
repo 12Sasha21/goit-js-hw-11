@@ -6,7 +6,6 @@ import ImgsApiService from './js/img-service';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import LoadMoreBtn from './js/components/load-more-btn';
-import smoothScroll from './js/components/smooth';
 
 const refs = getRefs();
 const imgsApiService = new ImgsApiService();
@@ -20,6 +19,8 @@ refs.searchForm.addEventListener('submit', onSearch);
 refs.gallery.addEventListener('click', onOpenModal);
 loadMoreBtn.refs.button.addEventListener('click', onLoadMore);
 
+// ---------------------------------------------------------------------------
+
 function onSearch(event) {
   event.preventDefault();
 
@@ -28,9 +29,10 @@ function onSearch(event) {
   if (imgsApiService.query === '') {
     return;
   }
+
   imgsApiService.fetchApi().then(data => {
     appendHitsMarkup(data.hits);
-    scrollToSearch();
+
     if (data.total === 0) {
       Notiflix.Notify.warning(
         'Sorry, there are no images matching your search query. Please try again.',
@@ -38,19 +40,22 @@ function onSearch(event) {
     }
     if (data.total > 0) {
       Notiflix.Notify.success(`Hooray! We found ${data.total} images.`);
-      loadMoreBtn.show();
+        loadMoreBtn.show();
     }
   });
 
-  imgsApiService.resetPage();
+  imgsApiService.resetPage( );
   loadMoreBtn.enable();
   clearHitsContainer();
 }
+
+// -------------------------------------------------------------------------
 
 function onLoadMore() {
   imgsApiService.fetchApi().then(data => {
     appendHitsMarkup(data.hits);
     scrollToMore();
+
     if (Math.ceil(data.totalHits / 40) === imgsApiService.page - 1) {
       loadMoreBtn.hide();
       Notiflix.Notify.info("We're sorry, but you've reached the end of search results.");
@@ -79,22 +84,12 @@ function onOpenModal(event) {
   }).refresh();
 }
 
-function scrollToSearch() {
-  const firstEl = document.querySelector('.gallery a');
-  const { height: cardHeight } = firstEl.getBoundingClientRect();
-
-  window.scrollBy({
-    top: cardHeight * 0.15,
-    behavior: 'smooth',
-  });
-}
-
 function scrollToMore() {
   const firstEl = document.querySelector('.gallery a');
   const { height: cardHeight } = firstEl.getBoundingClientRect();
 
   window.scrollBy({
-    top: cardHeight * 2.45,
+    top: cardHeight * 2,
     behavior: 'smooth',
   });
 }
