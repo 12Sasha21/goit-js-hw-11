@@ -5,7 +5,7 @@ import Notiflix from 'notiflix';
 import ImgsApiService from './js/img-service';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
-import LoadMoreBtn from './js/components/load-more-btn';
+import LoadMoreBtn from './js/load-more-btn';
 
 const refs = getRefs();
 const imgsApiService = new ImgsApiService();
